@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'message.dart';
-import 'people.dart';
-import 'person.dart';
+import 'chat.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -23,7 +21,36 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  var text = ['消息','联系人','我'];
+  var _barList = [
+    AppBar(
+      title: Text('消息'),
+      actions: <Widget>[
+        IconButton(
+          tooltip: 'more',
+          icon: Icon(Icons.more_vert),
+          onPressed: () {},
+        )
+      ],
+    ),
+    AppBar(
+      title: Text('联系人'),
+      actions: <Widget>[
+        IconButton(
+          tooltip: 'search',
+          icon: Icon(Icons.search),
+          onPressed: () {},
+        ),
+        IconButton(
+          tooltip: 'more',
+          icon: Icon(Icons.more_vert),
+          onPressed: () {},
+        )
+      ],
+    ),
+    AppBar(
+      title: Text('我'),
+    ),
+  ];
 
   var _pageList = [
     MessagePage(),
@@ -44,27 +71,7 @@ class _HomePageState extends State<HomePage> {
     // than having to individually change instances of widgets.
 
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the HomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(text[_pageIndex]),
-        actions: <Widget>[
-          IconButton(
-            tooltip: 'search',
-            icon: Icon(Icons.search),
-            onPressed: () {
-
-            },
-          ),
-          IconButton(
-            tooltip: 'more',
-            icon: Icon(Icons.more_vert),
-            onPressed: () {
-
-            },
-          )
-        ],
-      ),
+      appBar: _barList[_pageIndex],
       //drawer: Profile(),
       body: _pageList[_pageIndex],
       //floatingActionButton: FloatingActionButton(
@@ -72,11 +79,6 @@ class _HomePageState extends State<HomePage> {
       //  tooltip: 'Increment',
       //  child: Icon(Icons.add),
       //), // This trailing comma makes auto-formatting nicer for build methods.
-      /* bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 50.0,
-        ),
-      ) */
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _pageIndex,
         onTap: (index) {
@@ -87,15 +89,15 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            title: Text(text[0]),
+            title: Text('消息'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            title: Text(text[1])
+            title: Text('联系人')
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text(text[2])
+            title: Text('我')
           ),
         ],
       ),
@@ -159,11 +161,98 @@ class Profile extends StatelessWidget {
   }
 }
 
+class MessagePage extends StatelessWidget {
+  _buildContactList() {
+    return <ContactModal>[
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+    ];
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ContactsList(_buildContactList()),
+      
+    );
+  }
+}
 
+class PeoplePage extends StatelessWidget {
+  _buildContactList() {
+    return <ContactModal>[
+      const ContactModal(
+          fullName: '联系人', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+    ];
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: ContactsList(_buildContactList()));
+  }
+}
 
+class PersonPage extends StatelessWidget {
+  _buildContactList() {
+    return <ContactModal>[
+      const ContactModal(
+          fullName: '我自己', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+      const ContactModal(
+          fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
+      const ContactModal(
+          fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com'),
+      const ContactModal(
+          fullName: 'Nishant Srivastava', email: 'nishant.srivastava@example.com'),
+    ];
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: ContactsList(_buildContactList()));
+  }
+}
 
 
 class ContactsList extends StatelessWidget {
@@ -196,7 +285,16 @@ class ContactListItem extends StatelessWidget {
     return ListTile(
         leading: CircleAvatar(child: Text(_contactModal.fullName[0])),
         title: Text(_contactModal.fullName),
-        subtitle: Text(_contactModal.email));
+        subtitle: Text(_contactModal.email),
+        onTap: () {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => ChatPage()
+            )
+          );
+        },
+      );
   }
 }
 
