@@ -47,15 +47,21 @@ class _HomePageState extends State<HomePage> {
         )
       ],
     ),
-    AppBar(
+    AppBar(//toolbarOpacity: 0.1,
       title: Text('我'),
     ),
+    /* SliverAppBar(
+      expandedHeight: 150.0,
+      flexibleSpace: const FlexibleSpaceBar(
+        title: Text('我'),
+      ),
+    ) */
   ];
 
   var _pageList = [
     MessagePage(),
     PeoplePage(),
-    PersonPage()
+    Profile()
   ];
 
   var _pageIndex = 0;
@@ -114,8 +120,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //return Container(height: 1.0, width: 1.0,);
-    return Drawer(
-      child: ListView(
+    return ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
@@ -127,15 +132,15 @@ class Profile extends StatelessWidget {
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage('assets/images/avatar.jpg'),
             ),
-            otherAccountsPictures: <Widget>[
+            /* otherAccountsPictures: <Widget>[
               CircleAvatar(
                 backgroundImage: AssetImage('assets/images/avatar.jpg'),
               ),
               CircleAvatar(
                 backgroundImage: AssetImage('assets/images/avatar.jpg'),
               )
-            ],
-            onDetailsPressed: () {},
+            ], */
+            //onDetailsPressed: () {},
           ),
           ListTile(
             title: Text('Item 1'),
@@ -156,8 +161,7 @@ class Profile extends StatelessWidget {
             },
           ),
         ],
-      )
-    );
+      );
   }
 }
 
